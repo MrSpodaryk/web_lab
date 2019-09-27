@@ -33,7 +33,7 @@ nav > *{
 }
 .nav-item > a:hover, .dropdown-content > a:hover {
 	background-color: #ffb8c0;
-	animation: nav 0.2s;
+	animation: nav 0.2s ;
 	transform: scale(1.1);
 }
 .dropdown-content{
