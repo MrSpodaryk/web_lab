@@ -1,97 +1,44 @@
 html{
-	font-family: "Lucida Console", Monaco, monospace;
-}
-nav{
-	width: 100%;
-	font-size: 22px;
-}
-nav > *{
-	display: inline-block;
-	height: 75px;
+	font-family: "Lucida Console", Monaco, monospace !important;
 }
 #logo{
-	height: inherit;
-	transform: translateX(-500px);
-	animation: slide_in 0.5s forwards;
+	max-height: 75px;
+	animation: slide_in 0.7s forwards ease;
 }
-#nav{
-	list-style-type: none;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-
-}
-.nav-item{
-	display: inline-block;
-}
-.nav-item > a{
-	display: inline-block;
-	text-decoration: none;
-	text-align: center;
-	padding: 1.8em;
-	color: #bf1125;
-}
-.nav-item > a:hover, .dropdown-content > a:hover {
+.nav-link:hover, .dropdown-item:hover {
 	background-color: #ffb8c0;
+	color: black;
 	animation: nav 0.2s ;
 	transform: scale(1.1);
 }
-.dropdown-content{
-	display: none;
-	position: absolute;
-	margin-top: -1.4em;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-	background-color: white;
+.navbar, .dropdown-menu{
+	font-size: 25px;
 }
-.dropdown-content > a{
-	display: block;
-	text-decoration: none;
-	color: inherit;
-	padding: 0.5em;
-	text-align: center;
+.nav-link, .dropdown-item{
+	color: black !important;	
+	border-radius: 30px;
 }
-.dropdown:hover > .dropdown-content{
+li.dropdown:hover > .dropdown-menu{
 	display: block;
 }
 
 /*content*/
 
-#baner{
-	margin-top: 1em;
+.banner{
 	animation: show_in 0.5s;
 }
-
-article > h2{
-	text-align: center;
-}
-article{
-	margin: 1.5em;
-	overflow: auto;
-}
 article > section{
-	padding: 1.5em;
 	font-size: 18px;
 }
 
 .member{
-	margin: 2em;
 	height: 20em;
-}
-.member-left{
-	float: left;
-	clear: left;
-}
-.member-right{
-	float: right;
 }
 .arrow{
 	font-size: 2em;
 }
 
-footer{
-	text-align: center;
-	color: #919191;
+.page-footer{
 	font-size: 14px;
 	border-top: 1px solid #919191;
 }
@@ -129,6 +76,8 @@ footer{
 
 /*Animations*/
 @keyframes slide_in{
+	0% {transform: translateX(-100%);}
+	75% {transform: translateX(50px);}
 	100% { transform: translateX(0); }
 }
 @keyframes show_in {
@@ -145,6 +94,6 @@ footer{
   }
 }
 @keyframes nav{
-	50% {transform: scale(0.9);}
+	50% {transform: scale(0.8);}
 	100% { transform: scale(1.1); }
 }
