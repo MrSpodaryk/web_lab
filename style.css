@@ -1,5 +1,13 @@
 html{
 	font-family: "Lucida Console", Monaco, monospace !important;
+	height: 100%;
+	min-height: 100%;
+	position: relative;
+}
+body{
+	min-height: 100vh;
+	position: relative;
+	padding-bottom: 65px;
 }
 #logo{
 	max-height: 75px;
@@ -39,41 +47,24 @@ article > section{
 }
 
 .page-footer{
+	position: absolute;
+    bottom: 0;
 	font-size: 14px;
+	height: 65px;
 	border-top: 1px solid #919191;
+	width: 100%;
 }
 
 /*Tour Schedule*/
-.center-table{
-	margin-top: 2em;
-	border-collapse: collapse;
-	text-align: center;
-	margin-bottom: 10%;
-}
-.center-table > caption{
-	margin-bottom: 1em;
-	font-size: 25px;
-	font-weight: bold;
-}
-.caption-row{
-	font-size: 22px;
-	font-weight: bold;
-	border-bottom: 2px solid black;
-}
 .table-row > td:nth-child(2){
 	border-left: 2px solid black;
 	border-right: 2px solid black;
 }
-.table-row > td{
-	padding: 0.5em;
-	padding-left: 1em;
-	padding-right: 1em;
-	font-size: 18px;
-}
-.table-row:nth-child(odd){
-	background-color: #ffb8c0;
-}
 
+/*News*/
+.new-img{
+	max-height: 400px;
+}
 /*Animations*/
 @keyframes slide_in{
 	0% {transform: translateX(-100%);}
