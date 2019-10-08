@@ -46,45 +46,29 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="container">
-			<div class="text-center mb-1">
-				<img class="img img-fluid banner" src="assets/imgs/DM_banner.jpg">
-			</div>
-		</div>
 	</header>
-	<div class="container table-responsive">
-		<table class="table table-striped text-center">
-			<caption class="text-center h2" style="color: black; caption-side: top;">Tour Schedule</caption>
-			<thead>
-				<tr>
-					<th scope="col">▼ Date of Performance</th>
-					<th scope="col">▼ City</th>
-					<th scope="col">▼ Performance time</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="table-row">
-					<td>23.09.2019</td>
-					<td>New York</td>
-					<td>20:00</td>
-				</tr>
-				<tr class="table-row">
-					<td>31.09.2019</td>
-					<td>San Francisco</td>
-					<td>18:00</td>
-				</tr>
-				<tr class="table-row">
-					<td>31.10.2019</td>
-					<td>Warsaw</td>
-					<td>19:00</td>
-				</tr>
-				<tr class="table-row">
-					<td>21.11.2019</td>
-					<td>London</td>
-					<td>21:00</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="container">
+		<form>
+			<div class="row mt-3 p-3">
+				<div class="col-12 col-md-4 mb-2 mb-md-0">
+					<input type="button" class="form-control btn btn-success" value="Upload photo">
+				</div>
+				<div class="col-12 col-md-8 text-center">
+					<img src="./assets/imgs/empty.jpg" class="img-fluid">
+				</div>
+			</div>
+		</form>
+		<form>
+			<div class="row mt-3 p-3">
+				<div class="col-12 col-md-4 mb-2 mb-md-0">
+					<input type="submit" class="form-control btn btn-success" value="Send">
+				</div>
+				<div class="col-12 col-md-8 text-center">
+					<input type="text" class="form-control mb-2" placeholder="News title">
+					<textarea class="form-control" placeholder="News body" rows="7"></textarea>
+				</div>
+			</div>
+		</form>
 	</div>
 	<footer class="page-footer">
 		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
