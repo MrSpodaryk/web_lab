@@ -65,6 +65,10 @@ article > section{
 .new-img{
 	max-height: 400px;
 }
+
+.appeal{
+	border-bottom: 2px solid black;
+}
 /*Animations*/
 @keyframes slide_in{
 	0% {transform: translateX(-100%);}
