@@ -51,21 +51,21 @@
 		<form>
 			<div class="row mt-3 p-3">
 				<div class="col-12 col-md-4 mb-2 mb-md-0">
-					<input type="button" class="form-control btn btn-success" value="Upload photo">
+					<input type="file" class="form-control btn btn-success" onchange="addImg(this.files);" value="Upload photo">
 				</div>
 				<div class="col-12 col-md-8 text-center">
-					<img src="./assets/imgs/empty.jpg" class="img-fluid">
+					<img src="./assets/imgs/empty.jpg" id="imgPreview" class="img-fluid">
 				</div>
 			</div>
 		</form>
 		<form>
 			<div class="row mt-3 p-3">
 				<div class="col-12 col-md-4 mb-2 mb-md-0">
-					<input type="submit" class="form-control btn btn-success" value="Send">
+					<input type="button" class="form-control btn btn-success" onclick="addNews()" value="Send">
 				</div>
 				<div class="col-12 col-md-8 text-center">
-					<input type="text" class="form-control mb-2" placeholder="News title">
-					<textarea class="form-control" placeholder="News body" rows="7"></textarea>
+					<input type="text" class="form-control mb-2" id="newsTitle" placeholder="News title">
+					<textarea class="form-control" placeholder="News body" id="newsBody" rows="7"></textarea>
 				</div>
 			</div>
 		</form>
@@ -74,4 +74,25 @@
 		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
 	</footer>
 </body>
+<script type="text/javascript">
+	var src;
+	var img = document.getElementById("imgPreview");
+	function addImg(files){
+		src = window.URL.createObjectURL(files[0]);
+		img.src = src;
+	}
+	function addNews(){
+		var newsTitle = document.getElementById("newsTitle").value;
+		var newsBody = document.getElementById("newsBody").value;
+		if(newsTitle == undefined || newsTitle == "" || newsBody == undefined || newsBody == "" || src == undefined){
+			alert("Please, enter valid input");
+			return;
+		}
+		newsTitle = undefined;
+		newsBody = undefined;
+		img.src = "./assets/imgs/empty.jpg";
+		src = undefined;
+		alert("News added");
+	}
+</script>
 </html>
