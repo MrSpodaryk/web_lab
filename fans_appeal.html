@@ -104,7 +104,7 @@
 	</footer>
 	<script type="text/javascript">
 		function newAppeal(){
-			var newAppealText = document.getElementById("newAppealText").value;
+			var newAppealText = document.getElementById("newAppealText").value.trim();
 			if (newAppealText === undefined || newAppealText.length == ""){
 				alert("Enter valid appeal!");
 				return;
