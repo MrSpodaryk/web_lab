@@ -14,25 +14,18 @@ function newAppeal(){
 		time: time,
 		author: "Jack"
 	};
+
 	var serialNewAppeal = JSON.stringify(newAppeal);
-	var existingAppeals = localStorage.getItem('appealsList');
-	existingAppeals = JSON.parse(existingAppeals);
-	if (existingAppeals === null){
-		existingAppeals = [];
-	}
-	existingAppeals.push(serialNewAppeal);
-	existingAppeals = JSON.stringify(existingAppeals);
-	localStorage.setItem("appealsList", existingAppeals);
+	addAppeal(serialNewAppeal);
+
 	document.getElementById("newAppealText").value = "";
 	show(true);
 }
 
 function show(showLast = false){
-	console.log(isOnline());
-	var existingAppeals = localStorage.getItem('appealsList');
-	existingAppeals = JSON.parse(existingAppeals);
-	if (showLast){
-		existingAppeals = [existingAppeals[existingAppeals.length - 1]];
+	var existingAppeals = getExistingAppeals();
+	if (showLast && existingAppeals.length != 0){
+		existingAppeals = [existingAppeals.slice(-1)[0]];
 	}
 	for (appeal in existingAppeals){
 		appeal = JSON.parse(existingAppeals[appeal]);
@@ -59,8 +52,14 @@ function show(showLast = false){
 
 show();
 
-function isOnline(){
-	return navigator.onLine;
+function handleConnectionChange(event){
+    if(event.type == "offline"){
+        console.log("You lost connection.");
+    }
+    if(event.type == "online"){
+        console.log("You are now back online.");
+        localStorage.removeItem('appealsList');
+    }
 }
-
-var dataStorage
+window.addEventListener('online', handleConnectionChange);
+window.addEventListener('offline', handleConnectionChange);
