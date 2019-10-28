@@ -82,14 +82,14 @@
 		img.src = src;
 	}
 	function addNews(){
-		var newsTitle = document.getElementById("newsTitle").value;
-		var newsBody = document.getElementById("newsBody").value;
+		var newsTitle = document.getElementById("newsTitle").value.trim();
+		var newsBody = document.getElementById("newsBody").value.trim();
 		if(newsTitle == undefined || newsTitle == "" || newsBody == undefined || newsBody == "" || src == undefined){
 			alert("Please, enter valid input");
 			return;
 		}
-		newsTitle = undefined;
-		newsBody = undefined;
+		document.getElementById("newsTitle").value = "";
+		document.getElementById("newsBody").value = "";
 		img.src = "./assets/imgs/empty.jpg";
 		src = undefined;
 		alert("News added");
