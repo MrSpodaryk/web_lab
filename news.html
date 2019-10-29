@@ -54,51 +54,27 @@
 	</header>
 	<div class="container-fluid mt-4">
 		<div class="text-center"><h2 class="h2">News</h2></div>
-		<div class="row text-center">
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid new-img" src="./assets/imgs/news_1.jpg">
-				<h4 class="h4">Devotion Tour</h4>
-				<p>Depeche Mode starts new worldwide tour. Don't miss it!</p>
-			</div>
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_2.jpg">
-				<h4 class="h4">Personal Jesus</h4>
-				<p>New album released, you'll enjoy it!</p>
-			</div>	
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_3.jpeg">
-				<h4 class="h4">We are popular</h4>
-				<p>We are popular, many famous journals write about us!</p>
-			</div>	
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_4.jpg">
-				<h4 class="h4">Global spirit tour</h4>
-				<p>We are going on a Europe tour, buy a ticket!</p>
-			</div>		
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid new-img" src="./assets/imgs/news_1.jpg">
-				<h4 class="h4">Devotion Tour</h4>
-				<p>Depeche Mode starts new worldwide tour. Don't miss it!</p>
-			</div>
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_2.jpg">
-				<h4 class="h4">Personal Jesus</h4>
-				<p>New album released, you'll enjoy it!</p>
-			</div>	
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_3.jpeg">
-				<h4 class="h4">We are popular</h4>
-				<p>We are popular, many famous journals write about us!</p>
-			</div>	
-			<div class="col-12 col-md-4 col-lg-3">
-				<img class="img-fluid  new-img" src="./assets/imgs/news_4.jpg">
-				<h4 class="h4">Global spirit tour</h4>
-				<p>We are going on a Europe tour, buy a ticket!</p>
-			</div>
-		</div>
+		<div class="row text-center" id="container"><div>
 	</div>
 	<footer class="page-footer">
 		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
 	</footer>
+	<script type="text/javascript" src="assets/js/storage.js"></script>
+	<script type="text/javascript" src="assets/js/news.js"></script>
+	<script type="text/javascript">
+		showNews();
+
+		function handleConnectionChange(event){
+			if(event.type == "offline"){
+				console.log("You lost connection.");
+			}
+			if(event.type == "online"){
+				console.log("You are now back online.");
+				localStorage.removeItem('newsList');
+			}
+		}
+		window.addEventListener('online', handleConnectionChange);
+		window.addEventListener('offline', handleConnectionChange);
+	</script>
 </body>
 </html>

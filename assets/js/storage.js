@@ -2,6 +2,7 @@ function isOnline(){
     return navigator.onLine;
 }
 
+// Appeals
 
 function addAppeal(appeal){
     if (!isOnline()){
@@ -25,6 +26,35 @@ function getExistingAppeals(){
             existingAppeals = [];
         }
         return existingAppeals;
+    }
+    else{
+        console.log("Using server.....");
+        return [];
+    }
+};
+
+// News
+
+function addNews(news){
+    if (!isOnline()){
+        var existingNews = getExistingNews();
+        existingNews.push(news);
+        existingNews = JSON.stringify(existingNews);
+        localStorage.setItem("newsList", existingNews);
+    }
+    else{
+        console.log("Using server.....");
+    }
+}
+
+function getExistingNews(){
+    if (!isOnline()){
+        var existingNews = localStorage.getItem('newsList');
+        existingNews = JSON.parse(existingNews);
+        if (existingNews === null){
+            existingNews = [];
+        }
+        return existingNews;
     }
     else{
         console.log("Using server.....");

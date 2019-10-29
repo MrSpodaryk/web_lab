@@ -61,7 +61,7 @@
 		<form>
 			<div class="row mt-3 p-3">
 				<div class="col-12 col-md-4 mb-2 mb-md-0">
-					<input type="button" class="form-control btn btn-success" onclick="addNews()" value="Send">
+					<input type="button" class="form-control btn btn-success" onclick="addNewsFromForm()" value="Send">
 				</div>
 				<div class="col-12 col-md-8 text-center">
 					<input type="text" class="form-control mb-2" id="newsTitle" placeholder="News title">
@@ -73,26 +73,7 @@
 	<footer class="page-footer">
 		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
 	</footer>
+	<script type="text/javascript" src="assets/js/storage.js"></script>
+	<script type="text/javascript" src="assets/js/news.js"></script>
 </body>
-<script type="text/javascript">
-	var src;
-	var img = document.getElementById("imgPreview");
-	function addImg(files){
-		src = window.URL.createObjectURL(files[0]);
-		img.src = src;
-	}
-	function addNews(){
-		var newsTitle = document.getElementById("newsTitle").value.trim();
-		var newsBody = document.getElementById("newsBody").value.trim();
-		if(newsTitle == undefined || newsTitle == "" || newsBody == undefined || newsBody == "" || src == undefined){
-			alert("Please, enter valid input");
-			return;
-		}
-		document.getElementById("newsTitle").value = "";
-		document.getElementById("newsBody").value = "";
-		img.src = "./assets/imgs/empty.jpg";
-		src = undefined;
-		alert("News added");
-	}
-</script>
 </html>

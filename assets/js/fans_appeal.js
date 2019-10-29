@@ -19,10 +19,10 @@ function newAppeal(){
 	addAppeal(serialNewAppeal);
 
 	document.getElementById("newAppealText").value = "";
-	show(true);
+	showAppeals(true);
 }
 
-function show(showLast = false){
+function showAppeals(showLast = false){
 	var existingAppeals = getExistingAppeals();
 	if (showLast && existingAppeals.length != 0){
 		existingAppeals = [existingAppeals.slice(-1)[0]];
@@ -50,7 +50,7 @@ function show(showLast = false){
 	}
 }
 
-show();
+showAppeals();
 
 function handleConnectionChange(event){
     if(event.type == "offline"){
