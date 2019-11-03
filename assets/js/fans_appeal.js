@@ -19,7 +19,6 @@ function newAppeal(){
 	addAppeal(serialNewAppeal);
 
 	document.getElementById("newAppealText").value = "";
-	showAppeals(true);
 }
 
 function showAppeals(showLast = false){
@@ -57,6 +56,9 @@ function handleConnectionChange(event){
         console.log("You lost connection.");
     }
     if(event.type == "online"){
+    	var parent = document.getElementById("container");
+		parent.innerHTML = "";
+		showAppeals();
         console.log("You are now back online.");
         localStorage.removeItem('appealsList');
     }

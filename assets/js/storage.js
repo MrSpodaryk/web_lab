@@ -6,7 +6,7 @@ function isOnline(){
 
 function addAppeal(appeal){
     if (!isOnline()){
-        var existingAppeals = getExistingAppeals();
+        var existingAppeals = getExistingAppeals(true);
         existingAppeals.push(appeal);
         existingAppeals = JSON.stringify(existingAppeals);
         localStorage.setItem("appealsList", existingAppeals);
@@ -18,8 +18,8 @@ function addAppeal(appeal){
 
 
 
-function getExistingAppeals(){
-    if (!isOnline()){
+function getExistingAppeals(important = false){
+    if (isOnline() || important){
         var existingAppeals = localStorage.getItem('appealsList');
         existingAppeals = JSON.parse(existingAppeals);
         if (existingAppeals === null){
@@ -48,7 +48,7 @@ function addNews(news){
 }
 
 function getExistingNews(){
-    if (!isOnline()){
+    if (isOnline()){   
         var existingNews = localStorage.getItem('newsList');
         existingNews = JSON.parse(existingNews);
         if (existingNews === null){
