@@ -2,62 +2,119 @@ function isOnline(){
     return navigator.onLine;
 }
 
-// Appeals
+var useLocalStorage = false;
 
-function addAppeal(appeal){
-    if (!isOnline()){
-        var existingAppeals = getExistingAppeals(true);
-        existingAppeals.push(appeal);
-        existingAppeals = JSON.stringify(existingAppeals);
-        localStorage.setItem("appealsList", existingAppeals);
-    }
-    else{
-        console.log("Using server.....");
-    }
-};
-
-
-
-function getExistingAppeals(important = false){
-    if (isOnline() || important){
-        var existingAppeals = localStorage.getItem('appealsList');
-        existingAppeals = JSON.parse(existingAppeals);
-        if (existingAppeals === null){
-            existingAppeals = [];
+class LocalStorageManager{
+    addNew(type, obj){
+        if (!isOnline()){
+            let existing = this.getExisting(type, true);
+            existing.push(obj);
+            existing = JSON.stringify(existing);
+            localStorage.setItem(type.concat("List"), existing);
         }
-        return existingAppeals;
+        else{
+            console.log("Using server.....");
+        }
     }
-    else{
-        console.log("Using server.....");
-        return [];
+    getExisting(type, important = false){
+        if (isOnline() || important){
+            let existing = localStorage.getItem(type.concat("List"));
+            existing = JSON.parse(existing);
+            if (existing === null){
+                existing = [];
+            }
+            console.log(existing);
+            return existing;
+        }
+        else{
+            console.log("Using server.....");
+            return [];
+        }
     }
-};
-
-// News
-
-function addNews(news){
-    if (!isOnline()){
-        var existingNews = getExistingNews();
-        existingNews.push(news);
-        existingNews = JSON.stringify(existingNews);
-        localStorage.setItem("newsList", existingNews);
-    }
-    else{
-        console.log("Using server.....");
+    clearStorage(type){
+        localStorage.removeItem(type.concat("List"));
     }
 }
 
-function getExistingNews(){
-    if (isOnline()){   
-        var existingNews = localStorage.getItem('newsList');
-        existingNews = JSON.parse(existingNews);
-        if (existingNews === null){
-            existingNews = [];
+class IndexedDBManager{
+    connectDB(f) {
+        var indexedDB = window.indexedDB;
+        let request = indexedDB.open("mydb", 1);
+        request.onerror = function(err) {
+            console.log(err);
+        };
+        request.onsuccess = function() {
+            f(request.result);
         }
-        return existingNews;
+        request.onupgradeneeded = function(e) {
+            e.currentTarget.result.createObjectStore("appealList", {
+                keyPath: "id",
+                autoIncrement: true
+            });
+            e.currentTarget.result.createObjectStore("newsList", {
+                keyPath: "id",
+                autoIncrement: true
+            });
+        }
+    }
+
+    clearStorage(type) {
+        var request = window.indexedDB.deleteDatabase("mydb");
+        request.onerror;;
+        request.onsuccess;
+    }
+
+    addNew(type, obj) {
+        if (!isOnline()){
+            let storageName = type.concat("List");
+            this.connectDB(function(db) {
+                obj = JSON.parse(obj);
+                var request = db.transaction([storageName], "readwrite").objectStore(storageName).put(obj);
+
+                request.onerror;
+                request.onsuccess;
+            });
+        }
+        else{
+            console.log("Using server.....");
+        }
+    }
+
+    getExisting(type, important = false) {
+        if (isOnline()){
+            let storageName = type.concat("List")
+            this.connectDB(function(db) {
+                var request = db.transaction(storageName).objectStore(storageName).getAll();
+                request.onerror;
+                request.onsuccess = function(){
+                    let arr = [];
+                    request.result.forEach(function(el){
+                        arr.push(JSON.stringify(el));
+                    });
+                    if (type == "appeal"){
+                        showAppeals(false, arr);
+                    }
+                    else if(type == "news"){
+                        showNews(arr);
+                    }
+                }
+            });
+            return window.existing;
+        }
+        else{
+            console.log("Using server.....");
+            return [];
+        }
+    }
+
+}
+var dataProvider;
+(function(){
+    if (useLocalStorage){
+        dataProvider = new LocalStorageManager();
     }
     else{
-        console.log("Using server.....");
-        return [];
+        dataProvider = new IndexedDBManager();
     }
-};
+})();
+

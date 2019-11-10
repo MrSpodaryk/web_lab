@@ -24,7 +24,7 @@ function addNewsFromForm(){
 		newsTitle: newsTitle,
 		newsBody: newsBody
 	}
-	addNews(news);
+	dataProvider.addNew("news", JSON.stringify(news));
 
 	document.getElementById("newsTitle").value = "";
 	document.getElementById("newsBody").value = "";
@@ -33,10 +33,12 @@ function addNewsFromForm(){
 	alert("News added");
 }
 
-function showNews(){
-	var existingNews = getExistingNews();
+function showNews(existingNews = false){
+	if (!existingNews){
+		var existingNews = dataProvider.getExisting("news");
+	}
 	for (news in existingNews){
-		news = existingNews[news];
+		news = JSON.parse(existingNews[news]);
 
 		var newDiv = document.createElement("div");
 		newDiv.className = "col-12 col-md-4 col-lg-3";

@@ -16,13 +16,15 @@ function newAppeal(){
 	};
 
 	var serialNewAppeal = JSON.stringify(newAppeal);
-	addAppeal(serialNewAppeal);
+	dataProvider.addNew("appeal", serialNewAppeal);
 
 	document.getElementById("newAppealText").value = "";
 }
 
-function showAppeals(showLast = false){
-	var existingAppeals = getExistingAppeals();
+function showAppeals(showLast = false, existingAppeals = false){
+	if (!existingAppeals){
+		var existingAppeals = dataProvider.getExisting("appeal");
+	}
 	if (showLast && existingAppeals.length != 0){
 		existingAppeals = [existingAppeals.slice(-1)[0]];
 	}
@@ -60,7 +62,7 @@ function handleConnectionChange(event){
 		parent.innerHTML = "";
 		showAppeals();
         console.log("You are now back online.");
-        localStorage.removeItem('appealsList');
+        dataProvider.clearStorage("appeal");
     }
 }
 window.addEventListener('online', handleConnectionChange);

@@ -55,29 +55,31 @@
 	<div class="container-fluid mt-4">
 		<div class="text-center"><h2 class="h2">News</h2></div>
 		<div class="row text-center" id="container"><div>
-	</div>
-	<footer class="page-footer">
-		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
-	</footer>
-	<script type="text/javascript" src="assets/js/storage.js"></script>
-	<script type="text/javascript" src="assets/js/news.js"></script>
-	<script type="text/javascript">
-		if (isOnline()){
-
-		}
-		function handleConnectionChange(event){
-			if(event.type == "offline"){
-				console.log("You lost connection.");
-			}
-			if(event.type == "online"){
-				console.log("You are now back online.");
+		</div>
+		<footer class="page-footer">
+			<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
+		</footer>
+		<script type="text/javascript" src="assets/js/storage.js"></script>
+		<script type="text/javascript" src="assets/js/news.js"></script>
+		<script type="text/javascript">
+			if (isOnline()){
 				showNews();
-				localStorage.removeItem('newsList');
-
 			}
-		}
-		window.addEventListener('online', handleConnectionChange);
-		window.addEventListener('offline', handleConnectionChange);
-	</script>
-</body>
-</html>
+			function handleConnectionChange(event){
+				if(event.type == "offline"){
+					console.log("You lost connection.");
+				}
+				if(event.type == "online"){
+					var parent = document.getElementById("container");
+					parent.innerHTML = "";
+					console.log("You are now back online.");
+					showNews();
+					dataProvider.clearStorage("news");
+
+				}
+			}
+			window.addEventListener('online', handleConnectionChange);
+			window.addEventListener('offline', handleConnectionChange);
+		</script>
+	</body>
+	</html>
