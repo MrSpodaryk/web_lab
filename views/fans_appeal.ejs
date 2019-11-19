@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Depeche mode</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.png" />
+	
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a href="" class="navbar-brand"><img class="img-fluid" src="assets/imgs/DM_transparent_logo.png" id="logo"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mx-auto" >
+					<li class="nav-item">
+						<a class="nav-link" href="./index.html">Main</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./news.html">News</a>
+					</li>
+					<li class="nav-item dropdown">
+						<span class="nav-link dropdown-toggle">For fans</span>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="">Fan club</a>
+							<a class="dropdown-item" href="./tour_schedule.html">Tour schedule</a>
+							<a class="dropdown-item" href="">Lyrics</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./fans_appeal.html">Fans appeal</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./concert_venue.html">Concert venue</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./admin.html">Admin</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<div id="container">
+			<% for(var i=0; i<appeals.length;i++) {%>
+				<div class="row mt-3 p-3 appeal">
+					<div class="col-4 col-md-2 text-center bg-light">
+						<p><%=appeals[i].author %><br><%=appeals[i].time %><br><%=appeals[i].date %></p>
+					</div>
+					<div class="col-8 col-md-10 bg-light"><%=appeals[i].text %></div>
+				</div>
+			<%} %>
+		</div>
+		<form>
+			<div class="row mt-3 p-3">
+				<div class="col-12 col-md-4">
+					<button type="button" onclick="newAppeal()" class="form-control btn btn-success mb-3" value="Send">Send</button>
+				</div>
+				<div class="col-12 col-md-8" >
+					<textarea class="form-control" id="newAppealText" rows="7"></textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer class="page-footer">
+		<p class="text-center text-secondary">Depeche Mode 1980-2019 copyright <br> All rights are reserved.</p>
+	</footer>
+	<script type="text/javascript" src="assets/js/storage.js"></script>
+	<script type="text/javascript" src="assets/js/fans_appeal.js"></script>
+</body>
+</html>
