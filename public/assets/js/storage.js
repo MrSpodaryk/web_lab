@@ -2,7 +2,7 @@ function isOnline(){
     return navigator.onLine;
 }
 
-var useLocalStorage = false;
+var useLocalStorage = true;
 
 class LocalStorageManager{
     addNew(type, obj){
@@ -13,7 +13,25 @@ class LocalStorageManager{
             localStorage.setItem(type.concat("List"), existing);
         }
         else{
-            console.log("Using server.....");
+            let url;
+            if(type == "appeal"){
+                url = "/addAppeal";
+            }
+            else if(type == "news"){
+                url = "/addNews";
+            }
+            console.log("Using my server");
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: obj,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){},
+                failure: function(errMsg) {
+                    console.log(errMsg);
+                }
+            });
         }
     }
     getExisting(type, important = false){

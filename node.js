@@ -3,32 +3,85 @@ const path = require('path');
 const app=express();
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
+app.use(express.json())
+
+function saveToModgoDB(object, collection_name) {
+  dbo.collection(collection_name).insertOne(object, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+  });
+}
+
+
+app.post("/addNews", function(req, res){
+	news_obj = {
+		img: req.body.imgSrc,
+      title: req.body.newsTitle,
+      text: req.body.newsBody,
+	}
+  MongoClient.connect(url, function(err, db) {
+	    if (err) throw err;
+	    var dbo = db.db("mydb");
+	    dbo.collection("news").insertOne(news_obj, function(err, res) {
+	    if (err) throw err;
+	    console.log("1 document inserted");
+	 	});
+	 res.send(news_obj);
+	db.close();
+  });
+
+});
+
+app.post("/addAppeal", function(req, res){
+	appeal_obj = {
+		text: req.body.text,
+      date: req.body.date,
+      time: req.body.time,
+      author: req.body.author
+	}
+  MongoClient.connect(url, function(err, db) {
+	    if (err) throw err;
+	    var dbo = db.db("mydb");
+	    dbo.collection("appeals").insertOne(appeal_obj, function(err, res) {
+	    if (err) throw err;
+	    console.log("1 document inserted");
+	 	});
+	 res.send(appeal_obj);
+	db.close();
+  });
+
+});
 
 
 app.get('/fans_appeal.html', (req, res) => {
     const htmlFile = req.url.slice(1);
-    var appeal = {
-      author: "Pedro",
-      time: "20:01",
-      date: "2019-11-19",
-      text: "THis is good band. I want to hear such a content."
-    }
-    var appeals = [appeal, appeal, appeal];
-    res.render("fans_appeal", {
-      appeals: appeals,
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo.collection("appeals").find().toArray((err, items) => {
+        res.render("fans_appeal", {
+	      appeals: items,
+	    });
+      });
+      db.close();
     });
+    
 })
 
 app.get('/news.html', (req, res) => {
     const htmlFile = req.url.slice(1);
-    var object = {
-      src: "assets/imgs/news_4.jpg",
-      title: "20:43",
-      text: "This is top news about Depeche Mode. Visit us or you will die!!!"
-    }
-    var news = [object, object, object];
-    res.render("news", {
-      news: news,
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo.collection("news").find().toArray((err, items) => {
+      	console.log(items);
+        res.render("news", {
+          news: items
+        });
+      });
+      db.close();
     });
 })
 
